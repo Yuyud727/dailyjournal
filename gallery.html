@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <style>
+    .containerall {
+        display: flexbox;
+        padding: 10px;
+        background-color: aqua;
+        text-align: center;
+    }
+
+    .container {
+        display: flex;
+        padding: 10px;
+        margin: 10px;
+        justify-content: center;
+        flex-wrap: wrap; 
+    }
+
+    .container-box {
+        display: flex;
+        width: 10%;
+        padding: 10px;
+        margin: 10px;
+        box-sizing: border-box;
+        justify-content: center;
+        border: 2px solid black;
+        border-radius: 20px;
+        background-color: rgba(45, 39, 39, 0.784);
+        text-align: center;
+    }
+
+    .container-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .container-gambar, .container-video {
+        padding: 10px;
+        margin: 10px;
+        border: 2px solid black;
+        border-radius: 15px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .container-gambar {
+        width: 45%;
+    }
+
+    .container-video {
+        width: 45%;
+    }
+
+    a:link {
+        color: rgb(255, 255, 255);
+        background-color: transparent;
+        text-decoration: none;
+    }
+        
+    a:hover {
+        color: rgb(255, 255, 255);
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    /* Tablet atau laptop */
+    @media (min-width: 768px) {
+        .container {
+            flex-direction: row;
+        }
+        
+        .container-box {
+            width: 20%; 
+        }
+
+        .container-gambar, .container-video {
+            width: 45%;
+        }
+    }
+
+    /* Handphone atau layar kecil */
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column; 
+        }
+        
+        .container-box {
+            width: auto; 
+            margin-bottom: 10px;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .container-content {
+            flex-direction: column;
+        }
+
+        .container-gambar, .container-video {
+            width: 100%; 
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    </style>
+</head>
+<body>
+
+<div class="containerall">
+    <div class="container">
+        <h1 style="text-align: center;"><strong><em>Daily Journal</em></strong></h1>
+    </div>
+     
+    <div class="container">
+        <div class="container-box"><a href="home.html" style="color: white">Home</a></div>
+        <div class="container-box"><a href="gallery.html" style="color: white;">Gallery</a></div>
+        <div class="container-box"><a href="article.html" style="color: white">Article</a></div>
+    </div>
+</div>
+<hr style="line-height: 200%;">
+
+<!-- ISI -->
+<div class="container-content">
+    <div class="container-gambar">
+        <h1 style="text-align: center; font-size: 32px;"><strong>-Gambar-</strong></h1>
+        <img src="basket.jpg" width="200" height="200">
+        <img src="lkmm.jpg" width="200" height="200">
+        <img src="trading.jpg" width="200" height="200">
+        <img src="kotak.jpg" width="200" height="200">
+        <img src="bunkasai.jpg" width="200" height="200">
+        <img src="online.jpeg" width="200" height="200">
+    </div>
+
+    <div class="container-video">
+        <h1 style="text-align: center; font-size: 32px;"><strong>-Video-</strong></h1>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/Xrz7a__sFJQ?si=I0mW52m99yQfvRkN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+</div>
+
+<hr>
+<div class="containerall">
+    <p>Semarang 2023</p>
+</div>
+</body>
+</html>

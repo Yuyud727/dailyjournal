@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <style>
+    .containerall{
+        display: flexbox;
+        padding: 10px;
+        background-color: aqua;
+        text-align: center;
+    }
+
+    
+    .container {
+        display: flex;
+        padding: 10px;
+        margin: 10px;
+        justify-content: center;
+        flex-wrap: wrap; 
+    }
+
+    .container-box {
+        display: flex;
+        width: 10%;
+        padding: 10px;
+        margin: 10px;
+        box-sizing: border-box;
+        justify-content: center;
+        border: 2px solid black;
+        border-radius: 20px;
+        background-color: rgba(45, 39, 39, 0.784);
+        text-align: center;
+    }
+
+    .container-article {
+        padding: 10px;
+        margin: 10px;
+        box-sizing: border-box;
+        border: 2px solid black;
+        border-radius: 15px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .container-gallery {
+        padding: 10px;
+        float: left;
+        margin: 10px;
+        flex-basis: 25%;
+        border: 2px solid black;
+        border-radius: 15px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+    }
+
+    a:link {
+        color: rgb(255, 255, 255);
+        background-color: transparent;
+        text-decoration: none;
+        }
+        
+    a:hover {
+        color: rgb(255, 255, 255);
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    /* Tablet atau laptop */
+    @media (min-width: 768px) {
+        .container {
+            flex-direction: row;
+        }
+        
+        .container-box {
+            width: 20%; 
+        }
+        
+        .container-article {
+            width: auto;
+        }
+        
+        .container-gallery {
+            width: 25%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column; 
+        }
+        
+        /* Mengatur tampilan box icon */
+        .container-box {
+            width: auto; 
+            margin-bottom: 10px;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Mengatur tampilan artikel dan gallery */
+        .container-article, .container-gallery {
+            width: auto; 
+            margin: 0;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    </style>
+
+
+</head>
+<body>
+
+<div class="containerall">
+    <div class="container">
+        <h1 style="text-align: center;"><strong><em>Daily Journal</em></strong></h1>
+    </div>
+     
+        <div class="container">
+                <div class="container-box"><a href="home.html" style="color: white"w>Home</a></div>
+                <div class="container-box"><a href="gallery.html" style="color: white;">Gallery</a></div>
+                <div class="container-box"><a href="article.html" style="color: white">Article</a></div>
+        </div>
+    </div>
+    <hr style="line-height: 200%;">
+
+        
+
+<div class="container-article">
+    <div style="text-align: center; font-size: 10px;">
+        <h1><strong>-Article-</strong></h1>
+    </div>
+
+    <ol type="1">
+        <li><Strong>Senin, 30 September 2024</Strong></li>
+            <p>
+                Saya bangun jam 6 pagi, lalu sarapan jam 7 pagi. Sekitar jam 9.30, saya berangkat ke kampus, dan pada jam 12 siang saya pulang dari kampus. Setelah itu, saya makan siang di warung dekat kampus bernama Warung Bu Aryani. Pada pukul 12.30, saya kembali ke kampus. Sore hari, tepatnya jam 3, saya pulang ke rumah. Saya mengerjakan tugas sebentar dan bermain game selama total 2 jam. Jam 5 sore, saya berangkat ke gym, dan pulang sekitar jam 7. Setelah pulang, saya mandi pada jam 8 malam dan makan malam pada pukul 8.15. Setelah itu, saya belajar selama 1 jam, dan akhirnya tidur.            
+            </p>
+        <li><Strong>Selasa, 30 September 2024</Strong></li>
+            <p>
+                Saya bangun jam 6 pagi, lalu sarapan jam 7 pagi. Sekitar jam 9.30, saya berangkat ke kampus, dan pada jam 12 siang saya pulang dari kampus. Setelah itu, saya makan siang di warung dekat kampus bernama Warung Bu Aryani. Pada pukul 12.30, saya kembali ke kampus. Sore hari, tepatnya jam 3, saya pulang ke rumah. Saya mengerjakan tugas sebentar dan bermain game selama total 2 jam. Jam 5 sore, saya berangkat ke gym, dan pulang sekitar jam 7. Setelah pulang, saya mandi pada jam 8 malam dan makan malam pada pukul 8.15. Setelah itu, saya belajar selama 1 jam, dan akhirnya tidur.
+            </p>
+        <li><Strong>Rabu, 30 September 2024</Strong></li>
+            <p>
+                Saya bangun jam 6 pagi, lalu sarapan jam 7 pagi. Sekitar jam 9.30, saya berangkat ke kampus, dan pada jam 12 siang saya pulang dari kampus. Setelah itu, saya makan siang di warung dekat kampus bernama Warung Bu Aryani. Pada pukul 12.30, saya kembali ke kampus. Sore hari, tepatnya jam 3, saya pulang ke rumah. Saya mengerjakan tugas sebentar dan bermain game selama total 2 jam. Jam 5 sore, saya berangkat ke gym, dan pulang sekitar jam 7. Setelah pulang, saya mandi pada jam 8 malam dan makan malam pada pukul 8.15. Setelah itu, saya belajar selama 1 jam, dan akhirnya tidur.
+            </p>
+        <li><Strong>Kamis, 30 September 2024</Strong></li>
+            <p>
+                Saya bangun jam 6 pagi, lalu sarapan jam 7 pagi. Sekitar jam 9.30, saya berangkat ke kampus, dan pada jam 12 siang saya pulang dari kampus. Setelah itu, saya makan siang di warung dekat kampus bernama Warung Bu Aryani. Pada pukul 12.30, saya kembali ke kampus. Sore hari, tepatnya jam 3, saya pulang ke rumah. Saya mengerjakan tugas sebentar dan bermain game selama total 2 jam. Jam 5 sore, saya berangkat ke gym, dan pulang sekitar jam 7. Setelah pulang, saya mandi pada jam 8 malam dan makan malam pada pukul 8.15. Setelah itu, saya belajar selama 1 jam, dan akhirnya tidur.
+            </p>
+    </ol>
+</div>
+
+    <div class="containerall">
+        <p>Semarang 2023</p>
+    </div>
+
+</body>
+</html>
