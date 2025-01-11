@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Daftar putih file yang diperbolehkan
-$allowed_pages = ['dashboard', 'article', 'profile', 'settings']; // Tambahkan halaman yang valid di sini
+$allowed_pages = ['dashboard', 'article', 'gallery', 'profile', 'settings']; // Ditambahkan 'gallery'
 
 ?>
 
@@ -45,6 +45,18 @@ $allowed_pages = ['dashboard', 'article', 'profile', 'settings']; // Tambahkan h
             width: 100%;
             height: 100px; /* Set the fixed height of the footer here */ 
         }
+        /* Tambahan style untuk gallery */
+        .gallery-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .table-gallery img {
+            transition: transform 0.3s ease;
+        }
+        .table-gallery img:hover {
+            transform: scale(1.5);
+        }
     </style>
 </head>
 <body>
@@ -66,14 +78,17 @@ $allowed_pages = ['dashboard', 'article', 'profile', 'settings']; // Tambahkan h
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-dark">
             <li class="nav-item">
-                <a class="nav-link" href="admin.php?page=dashboard">Dashboard</a>
+                <a class="nav-link <?= (!isset($_GET['page']) || $_GET['page'] == 'dashboard') ? 'active' : '' ?>" href="admin.php?page=dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin.php?page=article">Article</a>
+                <a class="nav-link <?= (isset($_GET['page']) && $_GET['page'] == 'article') ? 'active' : '' ?>" href="admin.php?page=article">Article</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link <?= (isset($_GET['page']) && $_GET['page'] == 'gallery') ? 'active' : '' ?>" href="admin.php?page=gallery">Gallery</a>
             </li> 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?= $_SESSION['username']?>
+                    <?= htmlspecialchars($_SESSION['username'])?>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="logout.php">Logout</a></li> 
@@ -113,13 +128,28 @@ $allowed_pages = ['dashboard', 'article', 'profile', 'settings']; // Tambahkan h
         ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
         ></a>
     </div>
-    <div>Aprilyani Nur Safitri &copy; 2023</div>
+    <div>Pratama Yoga Yudhistira</div>
     </footer>
     <!-- footer end -->
+
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"
     ></script>
+
+    <!-- Script untuk preview gambar sebelum upload -->
+    <script>
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('preview').style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
 </body>
 </html>
