@@ -25,7 +25,32 @@ include "koneksi.php";
   .hero-dark {
     background-color: #001f3f; /* Biru gelap */
   }
+    .gallery-thumb {
+        transition: transform 0.3s ease;
+        border: 3px solid transparent;
+    }
+    
+    .gallery-thumb:hover {
+        transform: scale(1.05);
+        border-color: #fff;
+    }
+
+    .carousel-item img {
+        transition: transform 0.3s ease;
+    }
+
+    .carousel-caption {
+        transition: opacity 0.3s ease;
+        opacity: 0;
+        padding: 1rem;
+    }
+
+    .carousel-item:hover .carousel-caption {
+        opacity: 1;
+    }
+
   </style>
+  
 </head>
 <body>
   <!-- Navbar -->
@@ -47,6 +72,9 @@ include "koneksi.php";
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#gallery"><i class="fa fa-image"></i> Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="login.php"><i class="fa fa-image"></i> Login</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
@@ -140,33 +168,83 @@ include "koneksi.php";
 
 <!-- SECTION GALLERY -->
 <section id="gallery" class="bg-info p-5" style="position: relative;">
-  <div class="container text-center">
-    <h1 class="text-white mb-4">Gallery</h1>
-  </div>
-  <div id="carouselExample" class="carousel slide" style="background-color: blue; padding: 5px;">
-    <div class="carousel-inner">
-      <!-- Item 1 -->
-      <div class="carousel-item active">
-        <img src="bunkasai.jpg" class="d-block w-100" alt="Bunkasai" style="max-width: 100%; height: 60%;">
-      </div>
-      <!-- Item 2 -->
-      <div class="carousel-item">
-        <img src="kotak.jpg" class="d-block w-100" alt="Makan" style="max-width: 100%; height: 60%;">
-      </div>
-      <!-- Item 3 -->
-      <div class="carousel-item">
-        <img src="trading.jpg" class="d-block w-100" alt="Trading" style="max-width: 100%; height: 60%;">
-      </div>
+    <div class="container text-center">
+        <h1 class="text-white mb-4">Gallery</h1>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+    
+    <div id="carouselGallery" class="carousel slide" style="background-color: blue; padding: 5px;">
+        <div class="carousel-inner">
+            <?php
+            // Query untuk mengambil gambar dari database
+            $sql = "SELECT * FROM gallery ORDER BY upload_date DESC LIMIT 5";
+            $result = $conn->query($sql);
+            
+            if ($result && $result->num_rows > 0) {
+                $isFirst = true; // Untuk menandai item aktif
+                while ($row = $result->fetch_assoc()) {
+                    if (file_exists('uploads/gallery/' . $row['image_path'])) {
+            ?>
+                        <div class="carousel-item <?= $isFirst ? 'active' : '' ?>">
+                            <img src="uploads/gallery/<?= htmlspecialchars($row['image_path']) ?>" 
+                                 class="d-block w-100" 
+                                 alt="<?= htmlspecialchars($row['title']) ?>"
+                                 style="max-width: 100%; height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                                <h5><?= htmlspecialchars($row['title']) ?></h5>
+                                <p><small>Upload: <?= date('d M Y', strtotime($row['upload_date'])) ?></small></p>
+                            </div>
+                        </div>
+            <?php
+                        $isFirst = false;
+                    }
+                }
+            } else {
+                // Jika tidak ada gambar, tampilkan placeholder
+            ?>
+                <div class="carousel-item active">
+                    <div class="d-block w-100 bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 500px;">
+                        <h3>Belum ada gallery yang ditampilkan</h3>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselGallery" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselGallery" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    <!-- Thumbnail Navigation -->
+    <div class="container mt-4">
+        <div class="row g-3">
+            <?php
+            // Reset result pointer
+            if ($result) {
+                $result->data_seek(0);
+                while ($row = $result->fetch_assoc()) {
+                    if (file_exists('uploads/gallery/' . $row['image_path'])) {
+            ?>
+                        <div class="col-md-2 col-4">
+                            <img src="uploads/gallery/<?= htmlspecialchars($row['image_path']) ?>" 
+                                 class="img-thumbnail gallery-thumb" 
+                                 alt="<?= htmlspecialchars($row['title']) ?>"
+                                 style="width: 100%; height: 100px; object-fit: cover; cursor: pointer;"
+                                 onclick="jumpToSlide(this)">
+                        </div>
+            <?php
+                    }
+                }
+            }
+            ?>
+        </div>
+    </div>
+
 </section>
 
   <!-- FOOTER -->
@@ -295,6 +373,20 @@ include "koneksi.php";
       text.classList.remove("text-white");
       text.classList.add("text-dark");
     });
+    // Fungsi untuk menghitung indeks slide dan melompat ke slide tertentu
+function jumpToSlide(element) {
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    const index = Array.from(thumbs).indexOf(element);
+    const carousel = new bootstrap.Carousel(document.getElementById('carouselGallery'));
+    carousel.to(index);
+}
+
+// Aktifkan carousel dengan interval 5 detik
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = new bootstrap.Carousel(document.getElementById('carouselGallery'), {
+        interval: 5000
+    });
+});
 
     // Footer
     const footer = document.querySelector("footer");
