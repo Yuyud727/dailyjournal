@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	//prepared statement
   $stmt = $conn->prepare("SELECT username 
-                          FROM user 
+                          FROM user
                           WHERE username=? AND password=?");
 
 	//parameter binding 
@@ -50,33 +50,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $conn->close();
 } else {
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Operator</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | My Daily Journal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="icon" href="img/logo.png" />
 </head>
-<body>
-    <h1>Operator</h1>
-    <?php
-    $username = "admin";
-    $password = "12345";
-    ?>
-    <form method="post">
-        Username: <input type="text" name="user">
-        Password: <input type="text" name="pass">
-        <input type="submit" value="login">
-    </form>
-    <?php
-    if ($_REQUEST) {
-        if ($_POST['user'] == "admin" and $_POST['pass'] == "12345") {
-            echo "Username dan Password cocok";
-        } else {
-            echo "Username dan Password tidak cocok";
-        }
-    }
-    ?>
+
+<body class="bg-danger-subtle">
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12 col-sm-8 col-md-6 m-auto">
+                <div class="card border-0 shadow rounded-5">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-person-circle h1 display-4"></i>
+                            <p>My Daily Journal</p>
+                            <hr />
+                        </div>
+                        <form action="" method="post">
+                            <input type="text" name="user" class="form-control my-4 py-2 rounded-4" placeholder="Username" />
+                            <input type="password" name="pass" class="form-control my-4 py-2 rounded-4" placeholder="Password" />
+                            <div class="text-center my-3 d-grid">
+                                <button class="btn btn-danger rounded-4">Login</button>
+                            </div>
+                        </form>
+
+                        <!-- Kotak notifikasi akan muncul di sini -->
+                        <?php
+                        // Set variable username dan password dummy
+                        $username = "admin";
+                        $password = "123456";
+
+                        // Check apakah ada request dengan method POST yang dilakukan
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            // Check apakah username dan password yang di POST sama dengan data dummy
+                            if ($_POST['user'] == $username && $_POST['pass'] == $password) {
+                                // Pesan notifikasi sukses
+                                echo "<div class='alert alert-success mt-3 text-center'>Username dan Password Benar!</div>";
+                            } else {
+                                // Pesan notifikasi gagal
+                                echo "<div class='alert alert-danger mt-3 text-center'>Username atau Password Salah!</div>";
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
+
 </html>
 <?php
 }
