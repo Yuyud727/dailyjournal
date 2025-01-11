@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2024 at 05:57 AM
+-- Generation Time: Jan 09, 2025 at 09:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,10 +42,24 @@ CREATE TABLE `article` (
 
 INSERT INTO `article` (`id`, `judul`, `isi`, `gambar`, `tanggal`, `username`) VALUES
 (1, 'Kucing tentara', 'Kucing tentara adalah kucing pemberani yang mengenakan seragam militer mini lengkap dengan atribut, mencerminkan keberanian dan loyalitas dalam wujud menggemaskan.', 'tentara.jpg', '2024-12-24 01:57:04', ''),
-(2, 'Kucing gendut', 'Kucing gendut adalah kucing berbadan bulat dengan pipi tembam, gerakan lamban, dan sering terlihat menggemaskan saat bersantai atau minta perhatian.', 'gendut.jpg', '2024-12-24 01:57:04', ''),
+(2, 'Kucing gendut', 'Kucing gendut adalah kucing berbadan bulat dengan pipi tembam, gerakan lamban, dan sering terlihat menggemaskan saat bersantai atau minta perhatian.', 'gendut.jpg', '2024-12-30 23:51:23', 'admin'),
 (3, 'Kucing ragdoll', 'Kucing berbulu lembut, bertubuh besar, dan berkarakter manja yang cenderung rileks saat digendong.', 'ragdoll.jpg', '2024-12-24 02:09:12', ''),
 (4, 'Kucing sigma', 'Kucing mandiri, misterius, dan penuh karisma yang menarik perhatian tanpa berusaha.', 'sigma.jpg', '2024-12-24 02:09:12', ''),
-(5, 'Kucing bengal', 'Kucing Bengal adalah kucing berpenampilan eksotis dengan bulu berbintik atau bermotif seperti macan tutul, energik, cerdas, dan penuh rasa ingin tahu.', 'bengal.jpg', '2024-12-24 02:11:13', '');
+(6, 'Kucing besar', 'Singa (Panthera leo) adalah kucing besar yang hidup di Afrika dan sebagian India. Mereka sosial, hidup dalam kelompok, dan dikenal dengan surai pada jantan. Singa adalah pemangsa puncak yang berburu bersama untuk menangkap mangsa besar.', '20241230235552.jpg', '2024-12-30 23:55:52', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `upload_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `username` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -79,6 +93,12 @@ ALTER TABLE `article`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -92,7 +112,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
